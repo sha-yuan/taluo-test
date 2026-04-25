@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>塔罗占卜测试工具</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="aurora aurora-left"></div>
+    <div class="aurora aurora-right"></div>
+
+    <main class="tarot-app">
+      <section class="hero-card">
+        <p class="eyebrow">Tarot Insight Ritual</p>
+        <h1>塔罗牌占卜测试工具</h1>
+        <p class="hero-copy">输入问题、选择牌阵并抽牌。下方会常驻显示牌背，抽牌后直接翻开结果。</p>
+      </section>
+
+      <section class="control-card">
+        <div class="section-heading">
+          <p class="eyebrow">Question Area</p>
+          <h2>塔罗牌为你指引方向</h2>
+        </div>
+
+        <form id="tarot-form" class="tarot-form">
+          <textarea
+            id="question"
+            name="question"
+            rows="3"
+            placeholder="请输入你此刻最想确认的问题"
+          >今天运气怎么样</textarea>
+
+          <div class="spread-panel">
+            <p class="field-label">占卜牌筛选</p>
+            <div class="spread-options" role="radiogroup" aria-label="占卜方式">
+              <label class="spread-option">
+                <input type="radio" name="spread" value="single" checked>
+                <span>单张占卜</span>
+              </label>
+              <label class="spread-option">
+                <input type="radio" name="spread" value="triple">
+                <span>三张占卜</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="draw-button" id="draw-button">立即抽牌</button>
+        </form>
+      </section>
+
+      <section class="draw-card" id="draw-card" aria-live="polite">
+        <div class="cards-grid single" id="cards-grid"></div>
+      </section>
+
+      <section class="reading-card is-hidden" id="reading-card" aria-live="polite">
+        <div class="section-heading">
+          <p class="eyebrow">Reading Result</p>
+          <h2 id="reading-title">结果解读</h2>
+          <p class="section-copy" id="reading-subtitle"></p>
+        </div>
+
+        <div class="reading-block" id="reading-block"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
