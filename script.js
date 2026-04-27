@@ -21,7 +21,32 @@ const majorArcana = [
   { name: "太阳", keyword: "明朗好运", upright: "结果积极、表现发光、好运指数高", reversed: "好运仍在，但需要先整理心态和细节", uprightScore: 1.3, reversedScore: 0.4 },
   { name: "审判", keyword: "觉醒决定", upright: "适合做出关键决定、迎来阶段性结果", reversed: "迟疑错过时机、心里知道却不敢行动", uprightScore: 0.8, reversedScore: -0.7 },
   { name: "世界", keyword: "圆满完成", upright: "结果成熟、整体支持度高、适合收获", reversed: "接近完成但还差最后一步", uprightScore: 1.2, reversedScore: 0.3 }
-].map((card) => ({ ...card, arcana: "大阿尔卡那" }));
+].map((card) => ({ ...card, arcana: "大阿尔卡那", isMajor: true }));
+
+const majorInsights = {
+  "愚者": "愚者代表一段尚未被完全定义的旅程，重点不在结果已经确定，而在你是否愿意带着开放感迈出第一步。它会放大自由、试探和新鲜机会，也提醒你别让未知本身变成退缩的理由。",
+  "魔术师": "魔术师强调资源整合与主动创造，你手上并不是没有工具，而是需要把注意力、表达和执行力集中到同一个方向。它通常提示事情可以被你亲手推动，而不是只能等待外界变化。",
+  "女祭司": "女祭司把答案拉回直觉、潜意识和暂时没有说出口的信息。它会提醒你先观察细微信号，不急着把所有东西讲明，因为真正关键的线索可能藏在感受、沉默或反复出现的念头里。",
+  "皇后": "皇后象征滋养、吸引力与自然生长，说明事情需要被温柔地经营，而不是靠紧绷控制推进。它也代表资源、人缘和创造力正在形成，只要你愿意接收支持，局面会更容易变得丰盛。",
+  "皇帝": "皇帝强调秩序、边界和掌控力，适合把混乱的问题拆成规则、计划和可执行步骤。它提示你需要站稳自己的位置，用明确标准做判断，而不是被临时情绪带着走。",
+  "教皇": "教皇代表传统经验、系统方法和来自他人的指引。它提示你可以向可靠的人、成熟路径或已有规则借力，不必每一步都从零摸索，但也要确认这些框架真的适合当下的你。",
+  "恋人": "恋人并不只谈关系，也谈价值选择和内心是否一致。它提示你需要诚实面对真正想要的东西，当选择与内在信念对齐时，关系、合作或机会才会变得更顺。",
+  "战车": "战车代表方向感、意志力和快速推进。它说明局势需要你掌握节奏，把分散的力量收束到一个目标上；只要方向明确，行动本身会带来更强的势能。",
+  "力量": "力量强调柔韧的勇气，而不是硬碰硬的胜负。它提示你可以用耐心、稳定和自我安抚处理困难，真正的掌控来自不被情绪牵走，而不是压抑自己的感受。",
+  "隐者": "隐者代表退后一步、重新寻找内在答案。它提示现在可能不适合被外界声音推着走，你需要一点安静空间，把问题看清楚，再决定下一步要不要继续。",
+  "命运之轮": "命运之轮象征周期变化和外部转机。它提示局势正在流动，机会可能来自计划之外；你要做的是保持敏感和弹性，在变化出现时及时抓住窗口。",
+  "正义": "正义强调因果、规则和清晰判断。它提示你需要回到事实本身，检查信息是否完整、付出是否对等、决定是否公平；越理性，结果越容易站得住。",
+  "倒吊人": "倒吊人代表暂停、换位和以退为进。它说明卡住并不一定是失败，而可能是视角还没转换到位；当你愿意暂时放下执念，新的理解会慢慢出现。",
+  "死神": "死神指向结束、清理和更新。它不是单纯的坏牌，而是在提醒旧模式已经到了必须变化的阶段；愿意放下不再适合的东西，才会给新阶段腾出位置。",
+  "节制": "节制代表调和、修复和循序渐进。它提示事情需要耐心配比，不适合极端推进；当你能把情绪、资源和节奏重新调匀，局面会稳定变好。",
+  "恶魔": "恶魔揭示依赖、执念和被欲望牵制的部分。它提醒你看清自己是否被焦虑、习惯或短期诱惑绑住；一旦承认束缚在哪里，你就已经开始拿回选择权。",
+  "高塔": "高塔代表突发改变和旧结构松动。它会让人不舒服，但也把隐藏的问题推到台面；如果你愿意面对现实，这张牌反而能帮助你从不稳定的基础里解放出来。",
+  "星星": "星星象征疗愈、希望和长线愿景。它提示你可以重新相信未来，把注意力放回修复与愿望上；即使结果还没有立刻到来，方向感正在慢慢恢复。",
+  "月亮": "月亮代表迷雾、直觉和情绪投射。它提示你不要只相信表面信息，也不要被恐惧自动补全故事；当你愿意分辨感受和事实，答案会逐渐清晰。",
+  "太阳": "太阳代表明朗、成功和生命力。它通常带来很强的正面支持，说明事情有被看见、被确认、被照亮的可能；越坦率地行动，越容易得到回应。",
+  "审判": "审判象征觉醒、召唤和阶段性决定。它提示你其实已经听见内心的答案，只是还在等待确认；现在适合复盘过去，并做出更成熟的选择。",
+  "世界": "世界代表完成、整合和成熟结果。它说明事情已经接近一个完整阶段，你可以把经验、资源和成果收束起来；下一步不是从头开始，而是在更高层级继续展开。"
+};
 
 const suitProfiles = {
   wands: { name: "权杖", theme: "行动力、冲劲与创造火花", uprightTone: "说明事情更依赖主动推进与胆量", reversedTone: "提示热情可能被冲散，容易急躁或拖住节奏" },
@@ -47,6 +72,8 @@ const minorRanks = [
   { label: "国王", keyword: "掌控决断", uprightBase: "掌控感增强，适合定方向、拍板并统筹资源", reversedBase: "权力感失衡，可能因为僵硬或武断而影响结果", uprightScore: 0.9, reversedScore: -0.5 }
 ];
 
+const courtLabels = ["侍从", "骑士", "皇后", "国王"];
+
 const spreadPositions = {
   single: ["核心指引"],
   triple: ["现状", "阻碍/助力", "发展趋势"]
@@ -62,7 +89,10 @@ const tarotDeck = [
       reversed: `${rank.reversedBase} ${suit.reversedTone}。`,
       uprightScore: rank.uprightScore,
       reversedScore: rank.reversedScore,
-      arcana: "小阿尔卡那"
+      arcana: "小阿尔卡那",
+      suit: suit.name,
+      rank: rank.label,
+      isCourt: courtLabels.includes(rank.label)
     }))
   )
 ];
@@ -107,17 +137,89 @@ function updateStageMeta(spread, state = "idle") {
   stageTitle.textContent = spread === "triple" ? "三张牌位已准备好，适合观察完整趋势" : "核心牌位已准备好，适合快速确认方向";
 }
 
+function clampScore(score) {
+  return Math.max(5, Math.min(95, Math.round(score)));
+}
+
+function calculateCardScore(card) {
+  const influence = card.isMajor ? 1.32 : card.isCourt ? 1.12 : 1;
+  const majorBonus = card.isMajor ? 6 : 0;
+  const rawScore = 50 + (card.score * 24 * influence) + majorBonus;
+  return clampScore(rawScore);
+}
+
+function getConclusionBand(score) {
+  if (score >= 76) {
+    return {
+      label: "强支持",
+      summary: "牌面给出非常明确的正向信号，这件事值得你主动推进。",
+      advice: "建议你把关键行动提前，不要把好机会只停留在想法里。"
+    };
+  }
+  if (score >= 62) {
+    return {
+      label: "支持",
+      summary: "牌面整体站在你这边，当前方向有推进空间。",
+      advice: "建议你继续前进，同时保留一点弹性去调整细节。"
+    };
+  }
+  if (score >= 48) {
+    return {
+      label: "中性观望",
+      summary: "牌面没有完全否定，也没有给出压倒性的支持，结果更取决于后续选择。",
+      advice: "建议你先做小范围尝试，用真实反馈来校准下一步。"
+    };
+  }
+  if (score >= 34) {
+    return {
+      label: "谨慎不支持",
+      summary: "牌面提醒当前条件还不够稳，直接推进容易遇到阻力。",
+      advice: "建议你先处理信息、节奏或情绪上的卡点，再重新判断。"
+    };
+  }
+  return {
+    label: "暂缓",
+    summary: "牌面给出的阻力较强，此刻更适合收住节奏，而不是急着证明结果。",
+    advice: "建议你先暂停重大决定，保护好精力，并重新整理真正重要的目标。"
+  };
+}
+
+function describeCardType(card) {
+  if (card.isMajor) {
+    return "大阿尔卡那会放大这张牌在牌阵中的影响力，它更像一条主线命题，而不只是日常事件的提示。";
+  }
+  if (card.isCourt) {
+    return `这是一张小阿尔卡那宫廷牌，重点落在人物状态、处事姿态或你需要调用的内在人格上；${card.suit}的主题会通过“${card.rank}”这种角色能量表现出来。`;
+  }
+  return `这是一张小阿尔卡那数字牌，重点更贴近日常事件、现实节奏和具体行为；${card.suit}的主题会通过“${card.rank}”所代表的阶段显现。`;
+}
+
+function createCardInterpretation(card, position, question) {
+  const scoreText = `本牌分数：${card.cardScore}/100。`;
+  const orientationTone = card.orientation === "正位"
+    ? "正位说明这股能量比较顺畅，牌意更容易以直接、可用的方式进入现实。"
+    : "逆位说明这股能量正在被延迟、内耗或误用，需要先看见阻滞点，牌意才会转化成帮助。";
+  const majorText = card.isMajor ? ` ${majorInsights[card.name]}` : "";
+  const typeText = describeCardType(card);
+
+  return `${position}：${card.name}${card.orientation}。${scoreText} 这张${card.arcana}的核心牌意是“${card.keyword}”。${typeText}${majorText} ${orientationTone} 放回到“${question}”这个问题里，它具体提示：${card.meaning}`;
+}
+
 function drawCards(spread) {
   const count = spread === "triple" ? 3 : 1;
   return shuffle(tarotDeck).slice(0, count).map((card) => {
     const isReversed = Math.random() > 0.5;
-    return {
+    const drawnCard = {
       ...card,
       orientation: isReversed ? "逆位" : "正位",
       orientationClass: isReversed ? "reversed" : "upright",
       orientationArrow: isReversed ? "↓" : "↑",
       meaning: isReversed ? card.reversed : card.upright,
       score: isReversed ? card.reversedScore : card.uprightScore
+    };
+    return {
+      ...drawnCard,
+      cardScore: calculateCardScore(drawnCard)
     };
   });
 }
@@ -200,25 +302,22 @@ function renderCards(cards, spread) {
 }
 
 function createConclusion(question, cards, spread) {
-  const averageScore = cards.reduce((sum, card) => sum + card.score, 0) / cards.length;
-  const threshold = spread === "triple" ? 0.12 : 0.08;
-  const supported = averageScore >= threshold;
+  const averageScore = Math.round(cards.reduce((sum, card) => sum + card.cardScore, 0) / cards.length);
+  const band = getConclusionBand(averageScore);
   const reversedCount = cards.filter((card) => card.orientation === "逆位").length;
-  return `关于“${question}”，本次占卜结论为${supported ? "支持" : "不支持"}。${supported ? "牌面整体偏向正向，说明这件事有推进空间。" : "牌面整体更偏谨慎，说明当前条件尚未完全站在你这边。"}${reversedCount > 0 ? ` 本次出现 ${reversedCount} 张逆位牌，提示你特别留意节奏与判断。` : " 本次没有出现逆位牌，牌面态度相对直接。"}`;
+  const scoreList = cards.map((card) => `${card.name}${card.orientation} ${card.cardScore}分`).join("，");
+  return `关于“${question}”，本次综合分数为 ${averageScore}/100，结论分档为【${band.label}】。${band.summary}${band.advice} 本次抽到：${scoreList}。${reversedCount > 0 ? `其中 ${reversedCount} 张逆位牌提醒你留意节奏、判断和内在阻力。` : "本次没有逆位牌，牌面表达相对直接，行动阻力较少。"}`;
 }
 
 function createDetail(question, cards, spread) {
   if (spread === "single") {
     const [card] = cards;
-    return `<p>你抽到的是${card.name}${card.orientation}。这张${card.arcana}牌的核心特质是“${card.keyword}”，通常代表${card.orientation === "正位" ? "能量顺畅释放、主题更容易直接呈现" : "能量回收或受阻，主题会以提醒和修正的方式出现"}。放回到“${question}”这个问题里，它重点说明：${card.meaning}${card.orientation === "逆位" ? " 也就是说，这张牌不是单纯否定，而是在提醒你先处理卡住局面的那部分。" : " 也就是说，这张牌给出的态度比较直接，适合顺势行动。"} </p>`;
+    return `<p>${createCardInterpretation(card, spreadPositions[spread][0], question)} ${card.orientation === "逆位" ? "所以这张牌不是单纯否定，而是在提醒你先把卡住局面的那部分照顾好。" : "所以这张牌给出的态度比较直接，你可以顺着它指出的方向去行动。"}</p>`;
   }
 
   const cardSections = cards.map((card, index) => {
     const position = spreadPositions[spread][index];
-    const orientationTone = card.orientation === "正位"
-      ? "这张牌以正位出现，说明它的主题会更直接、更外显。"
-      : "这张牌以逆位出现，说明它的主题会带着阻滞、延迟或内在拉扯。";
-    return `${position}：${card.name}${card.orientation}。这张${card.arcana}牌的特质是“${card.keyword}”，${orientationTone} 放在这个位置上，它具体提示：${card.meaning}`;
+    return createCardInterpretation(card, position, question);
   });
 
   const combinedAnalysis = (() => {
@@ -227,7 +326,8 @@ function createDetail(question, cards, spread) {
     const thirdCard = cards[2];
     const hasReversed = cards.some((card) => card.orientation === "逆位");
 
-    return `综合来看，针对“${question}”，这组三张牌显示出一条清晰的推进链路：现状里的${firstCard.name}${firstCard.orientation}说明事情正围绕“${firstCard.keyword}”展开，代表你目前最真实的处境或起点；中间位置的${secondCard.name}${secondCard.orientation}把焦点拉到“${secondCard.keyword}”，说明问题真正的关键阻力或助力落在${secondCard.meaning}；最后的${thirdCard.name}${thirdCard.orientation}则把趋势落在“${thirdCard.keyword}”上，预示后续发展更可能表现为${thirdCard.meaning}。${hasReversed ? "由于牌阵中出现了逆位牌，说明这件事并不是单纯顺势推进就够了，你需要先处理牌面指出的卡点，再去承接后续机会。" : "三张牌之间衔接比较顺，说明你的问题有机会沿着当前方向继续展开，只要节奏稳住，结果会更清晰。"} `;
+    const averageScore = Math.round(cards.reduce((sum, card) => sum + card.cardScore, 0) / cards.length);
+    return `综合来看，针对“${question}”，这组三张牌的平均分为 ${averageScore}/100。现状里的${firstCard.name}${firstCard.orientation}（${firstCard.cardScore}分）说明事情正围绕“${firstCard.keyword}”展开，代表你目前最真实的处境或起点；中间位置的${secondCard.name}${secondCard.orientation}（${secondCard.cardScore}分）把焦点拉到“${secondCard.keyword}”，说明真正的关键阻力或助力落在${secondCard.meaning}；最后的${thirdCard.name}${thirdCard.orientation}（${thirdCard.cardScore}分）则把趋势落在“${thirdCard.keyword}”上，预示后续发展更可能表现为${thirdCard.meaning}。${hasReversed ? "由于牌阵中出现了逆位牌，说明这件事并不是单纯顺势推进就够了，你需要先处理牌面指出的卡点，再去承接后续机会。" : "三张牌之间衔接比较顺，说明你的问题有机会沿着当前方向继续展开，只要节奏稳住，结果会更清晰。"} `;
   })();
 
   return `
@@ -245,16 +345,18 @@ function createDetail(question, cards, spread) {
 function createAdvice(cards, spread) {
   const uprightCount = cards.filter((card) => card.orientation === "正位").length;
   const reversedCount = cards.length - uprightCount;
+  const averageScore = Math.round(cards.reduce((sum, card) => sum + card.cardScore, 0) / cards.length);
+  const band = getConclusionBand(averageScore);
   if (uprightCount === cards.length) {
-    return "总结来看，这次牌面整体顺畅，适合你继续推进。行动建议是：把注意力放在最想达成的一件事上，主动表达、主动争取，并在细节上保持稳定执行。";
+    return `行动建议：这次牌面整体顺畅，综合分属于【${band.label}】。你可以更相信自己的判断，把注意力放在最想达成的一件事上，主动表达、主动争取，并在细节上保持稳定执行。你已经具备往前走的条件，现在要做的是让行动跟上你的期待。`;
   }
   if (reversedCount === cards.length) {
-    return "总结来看，这次牌面更像强提醒。行动建议是：先放慢一步，核对信息与情绪状态，避免在焦虑、冲动或不确定的基础上做决定，等条件更清楚后再发力。";
+    return `行动建议：这次牌面更像温柔但明确的提醒，综合分属于【${band.label}】。先放慢一步，核对信息与情绪状态，避免在焦虑、冲动或不确定的基础上做决定。暂缓不是退缩，而是在帮你把下一次行动变得更有把握。`;
   }
   if (spread === "triple") {
-    return "总结来看，这次结果有机会也有变量。行动建议是：保留你想推进的方向，但给自己留出调整空间，先处理最明显的阻碍，再顺势推进下一步。";
+    return `行动建议：这次结果有机会也有变量，综合分属于【${band.label}】。保留你想推进的方向，同时给自己留出调整空间；先处理最明显的阻碍，再顺势推进下一步。你不需要一次把所有答案都拿到，只要把下一步走稳，局面就会开始回应你。`;
   }
-  return "总结来看，这次结果偏中性向上。行动建议是：可以开始行动，但不要只靠运气，最好先做一个小范围验证，再决定是否全面投入。";
+  return `行动建议：这次结果偏中性向上，综合分属于【${band.label}】。可以开始行动，但不要只靠运气，最好先做一个小范围验证，再决定是否全面投入。你已经看见方向了，接下来用一个具体动作把它变成现实。`;
 }
 
 function renderReading(question, cards, spread) {
@@ -270,7 +372,7 @@ function renderReading(question, cards, spread) {
       ${createDetail(question, cards, spread)}
     </article>
     <article class="reading-section">
-      <h3>总结与行动建议</h3>
+      <h3>行动建议</h3>
       <p>${createAdvice(cards, spread)}</p>
     </article>
   `;
