@@ -1,15 +1,24 @@
 :root {
-  --bg-deep: #08131f;
-  --bg-mid: #10263d;
-  --line: rgba(255, 233, 192, 0.18);
-  --gold: #e9c889;
-  --gold-soft: #fff0c7;
-  --text: #f6efe4;
-  --accent: #66d9d0;
-  --accent-strong: #96fff7;
-  --danger: #ff8578;
-  --danger-soft: #ffd0c8;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --page-bg: #fffdf8;
+  --surface: #ffffff;
+  --surface-soft: #f6f6f3;
+  --sand: #e5e5e0;
+  --sand-strong: #d8d8cf;
+  --warm-wash: rgba(253, 253, 247, 0.76);
+  --ink: #211922;
+  --muted: #62625b;
+  --line: #c8c8c1;
+  --line-soft: #e5e5e0;
+  --accent: #e60023;
+  --accent-strong: #bd001d;
+  --danger: #9e0a0a;
+  --danger-soft: #fff1ef;
+  --dark-tile: #33332e;
+  --dark-tile-soft: #262622;
+  --inverse: #ffffff;
+  --inverse-muted: rgba(255, 255, 255, 0.72);
+  --shadow: none;
+  --shadow-soft: none;
 }
 
 * {
@@ -23,11 +32,11 @@ body {
 }
 
 body {
-  font-family: "Noto Serif SC", serif;
-  color: var(--text);
+  font-family: "Pin Sans", -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ink);
   background:
-    radial-gradient(circle at top, rgba(70, 112, 161, 0.22), transparent 32%),
-    linear-gradient(160deg, #030812 0%, #08131f 45%, #10263d 100%);
+    linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(246, 246, 243, 0.92)),
+    var(--page-bg);
 }
 
 body::before {
@@ -35,11 +44,10 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(rgba(255, 240, 199, 0.4) 1px, transparent 1px),
-    radial-gradient(rgba(255, 240, 199, 0.14) 1px, transparent 1px);
-  background-position: 0 0, 18px 18px;
-  background-size: 36px 36px;
-  opacity: 0.14;
+    linear-gradient(90deg, rgba(229, 229, 224, 0.34) 1px, transparent 1px),
+    linear-gradient(rgba(229, 229, 224, 0.34) 1px, transparent 1px);
+  background-size: 88px 88px;
+  opacity: 0.32;
   pointer-events: none;
 }
 
@@ -50,68 +58,52 @@ body::before {
   padding: 24px 16px 56px;
 }
 
-.aurora {
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  filter: blur(24px);
-  border-radius: 50%;
-  opacity: 0.36;
-  pointer-events: none;
-}
-
-.aurora-left {
-  top: -100px;
-  left: -120px;
-  background: radial-gradient(circle, rgba(102, 217, 208, 0.5), transparent 65%);
-}
-
-.aurora-right {
-  top: 120px;
-  right: -120px;
-  background: radial-gradient(circle, rgba(233, 200, 137, 0.42), transparent 65%);
-}
-
 .tarot-app {
   position: relative;
   z-index: 1;
-  width: min(920px, 100%);
+  width: min(1080px, 100%);
   margin: 0 auto;
   display: grid;
-  gap: 20px;
+  gap: 16px;
 }
 
 .hero-card,
 .control-card,
-.draw-card,
 .reading-card {
-  background: linear-gradient(180deg, rgba(11, 25, 42, 0.88), rgba(8, 16, 28, 0.9));
-  border: 1px solid var(--line);
-  border-radius: 28px;
+  background: var(--warm-wash);
+  border: 1px solid rgba(200, 200, 193, 0.72);
+  border-radius: 32px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
-}
-
-.hero-card,
-.control-card,
-.draw-card,
-.reading-card {
-  padding: 24px 20px;
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .draw-card {
-  padding-top: 20px;
-  min-height: 668px;
-  display: flex;
-  align-items: stretch;
+  background:
+    linear-gradient(180deg, rgba(51, 51, 46, 0.96), rgba(38, 38, 34, 0.98));
+  border: 1px solid rgba(51, 51, 46, 0.16);
+  border-radius: 32px;
+  box-shadow: none;
+}
+
+.hero-card,
+.control-card,
+.draw-card,
+.reading-card {
+  padding: 24px;
+}
+
+.draw-card {
+  min-height: 688px;
 }
 
 .eyebrow {
   margin: 0 0 8px;
-  color: var(--gold);
+  color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 h1,
@@ -119,23 +111,24 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 h1 {
-  font-size: clamp(2.4rem, 7vw, 4.4rem);
-  line-height: 0.95;
+  font-size: 4.4rem;
+  line-height: 1.02;
 }
 
 h2 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  line-height: 1;
+  font-size: 2.8rem;
+  line-height: 1.08;
 }
 
 h3 {
-  font-size: 1.65rem;
-  color: var(--gold-soft);
+  font-size: 1.55rem;
+  color: var(--ink);
 }
 
 .hero-copy,
@@ -152,7 +145,11 @@ textarea,
 .hero-copy,
 .section-copy,
 .reading-section p {
-  color: rgba(246, 239, 228, 0.84);
+  color: var(--muted);
+}
+
+.hero-copy {
+  max-width: 620px;
 }
 
 .section-heading {
@@ -171,33 +168,45 @@ textarea,
 textarea {
   width: 100%;
   resize: vertical;
-  min-height: 110px;
-  border: 1px solid rgba(233, 200, 137, 0.28);
-  border-radius: 18px;
-  padding: 16px 18px;
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  min-height: 116px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 15px;
+  color: var(--ink);
+  background: #fff;
   font: inherit;
   outline: none;
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+textarea::placeholder {
+  color: rgba(29, 29, 31, 0.36);
 }
 
 textarea:focus {
-  border-color: rgba(102, 217, 208, 0.7);
-  box-shadow: 0 0 0 4px rgba(102, 217, 208, 0.12);
+  border-color: #435ee5;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(67, 94, 229, 0.18);
 }
 
 .spread-panel {
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  border: 1px solid rgba(233, 200, 137, 0.12);
+  padding: 10px;
+  background: var(--sand);
+  border-radius: 24px;
+  border: 1px solid var(--line-soft);
+}
+
+.field-label {
+  display: block;
+  margin: 8px 8px 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .spread-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 8px;
 }
 
 .spread-option {
@@ -211,45 +220,101 @@ textarea:focus {
 }
 
 .spread-option span {
-  display: block;
-  padding: 14px 16px;
-  border-radius: 16px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.04);
+  background: transparent;
   border: 1px solid transparent;
-  color: rgba(246, 239, 228, 0.9);
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  color: var(--ink);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.spread-option strong,
+.spread-option small {
+  font: inherit;
+  letter-spacing: 0;
+}
+
+.spread-option strong {
+  font-weight: 600;
+}
+
+.spread-option small {
+  color: rgba(29, 29, 31, 0.5);
+  font-size: 0.8rem;
 }
 
 .spread-option input:checked + span {
-  border-color: rgba(102, 217, 208, 0.58);
-  background: linear-gradient(180deg, rgba(24, 66, 78, 0.72), rgba(15, 34, 51, 0.95));
-  transform: translateY(-1px);
+  border-color: rgba(230, 0, 35, 0.18);
+  background: #fff;
+  box-shadow: inset 0 0 0 2px rgba(230, 0, 35, 0.08);
+  transform: translateY(-2px);
 }
 
 .draw-button {
   appearance: none;
   border: none;
-  border-radius: 999px;
-  padding: 16px 22px;
+  border-radius: 16px;
+  padding: 13px 22px;
   font: inherit;
-  font-weight: 700;
-  color: #07131f;
-  background: linear-gradient(135deg, #f4deb0, #66d9d0);
+  font-weight: 500;
+  color: #fff;
+  background: var(--accent);
   cursor: pointer;
-  box-shadow: 0 18px 32px rgba(102, 217, 208, 0.16);
-  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+  box-shadow: none;
+  transition: transform 160ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
 .draw-button:hover,
 .draw-button:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 36px rgba(102, 217, 208, 0.22);
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.draw-button:active {
+  transform: scale(0.97);
 }
 
 .draw-button:disabled {
-  opacity: 0.72;
+  opacity: 0.76;
   cursor: progress;
+}
+
+.draw-stage-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.draw-card .eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.stage-title {
+  margin: 0;
+  color: var(--inverse);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.stage-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 16px;
+  color: var(--ink);
+  background: var(--sand);
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
 .cards-grid {
@@ -259,25 +324,30 @@ textarea:focus {
   perspective: 1600px;
   align-items: start;
   align-content: center;
-  min-height: 628px;
-  padding: 18px;
-  border-radius: 26px;
-  border: 1px solid rgba(233, 200, 137, 0.14);
+  min-height: 596px;
+  padding: 24px;
+  border-radius: 28px;
+  border: 8px solid rgba(255, 255, 255, 0.92);
   background:
-    radial-gradient(circle at top, rgba(102, 217, 208, 0.08), transparent 36%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    linear-gradient(180deg, rgba(246, 246, 243, 0.1), rgba(229, 229, 224, 0.08));
+  box-shadow: none;
+  transition: transform 220ms ease, opacity 180ms ease;
+}
+
+.cards-grid.is-switching {
+  transform: scale(0.99);
+  opacity: 0.72;
 }
 
 .cards-grid.single {
-  grid-template-columns: minmax(260px, 380px);
+  grid-template-columns: minmax(270px, 390px);
   justify-content: center;
 }
 
 .cards-grid.triple {
-  grid-template-columns: repeat(3, minmax(210px, 250px));
+  grid-template-columns: repeat(3, minmax(205px, 236px));
   justify-content: center;
-  gap: 14px;
+  gap: 18px;
 }
 
 .tarot-card {
@@ -313,13 +383,12 @@ textarea:focus {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  border-radius: 26px;
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(233, 200, 137, 0.18);
-  box-shadow: var(--shadow);
+  border: 8px solid rgba(255, 255, 255, 0.94);
+  box-shadow: none;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    linear-gradient(160deg, rgba(25, 51, 72, 0.9), rgba(10, 23, 35, 0.92));
+    linear-gradient(180deg, rgba(51, 51, 46, 0.95), rgba(38, 38, 34, 0.98));
 }
 
 .tarot-back,
@@ -346,11 +415,12 @@ textarea:focus {
 }
 
 .back-copy p {
-  color: var(--gold-soft);
+  color: var(--inverse);
+  font-weight: 700;
 }
 
 .back-copy span {
-  color: rgba(246, 239, 228, 0.7);
+  color: var(--inverse-muted);
   font-size: 0.86rem;
 }
 
@@ -358,15 +428,15 @@ textarea:focus {
 .art-frame {
   position: relative;
   min-height: 312px;
-  border-radius: 22px;
+  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(233, 200, 137, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   display: grid;
   place-items: center;
   padding: 24px 18px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    linear-gradient(160deg, rgba(25, 51, 72, 0.9), rgba(10, 23, 35, 0.92));
+    rgba(31, 31, 28, 0.86);
 }
 
 .cards-grid.single .back-art,
@@ -381,7 +451,19 @@ textarea:focus {
 
 .cards-grid.triple .tarot-card:nth-child(1),
 .cards-grid.triple .tarot-card:nth-child(3) {
-  margin-top: 26px;
+  margin-top: 30px;
+}
+
+.cards-grid.triple .tarot-card:nth-child(1) {
+  transform: rotate(-1.5deg);
+}
+
+.cards-grid.triple .tarot-card:nth-child(2) {
+  transform: rotate(1deg);
+}
+
+.cards-grid.triple .tarot-card:nth-child(3) {
+  transform: rotate(-0.8deg);
 }
 
 .cards-grid.triple .tarot-card:nth-child(2) {
@@ -416,19 +498,18 @@ textarea:focus {
 .card-core {
   width: 100%;
   min-height: 100%;
-  border-radius: 18px;
+  border-radius: 16px;
   display: grid;
   align-content: center;
   justify-items: center;
   text-align: center;
-  border: 1px solid rgba(233, 200, 137, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
 }
 
 .card-back-core {
   padding: 24px 18px;
-  background:
-    radial-gradient(circle at center, rgba(102, 217, 208, 0.1), transparent 42%),
-    rgba(5, 14, 24, 0.56);
+  background: rgba(51, 51, 46, 0.62);
 }
 
 .card-back-core::before,
@@ -439,34 +520,35 @@ textarea:focus {
   position: absolute;
   inset: 18px;
   border-radius: 14px;
-  border: 1px solid rgba(233, 200, 137, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   pointer-events: none;
 }
 
 .card-back-core::after,
 .card-core::after {
   inset: 34px;
-  border-color: rgba(102, 217, 208, 0.1);
+  border-color: rgba(255, 255, 255, 0.04);
 }
 
 .card-back-mark {
   margin: 0;
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.1rem, 7vw, 3.3rem);
-  color: var(--gold-soft);
-  letter-spacing: 0.16em;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  font-size: 3.1rem;
+  color: #fff;
+  letter-spacing: 0;
 }
 
 .card-back-text {
   margin: 10px 0 0;
-  color: rgba(246, 239, 228, 0.74);
+  color: var(--inverse-muted);
   font-size: 0.92rem;
 }
 
 .card-position {
   margin: 0 0 6px;
-  color: var(--accent);
+  color: #ffd7d8;
   font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .card-title {
@@ -483,10 +565,10 @@ textarea:focus {
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  border-radius: 999px;
+  border-radius: 16px;
   font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .cards-grid.triple .orientation-badge {
@@ -495,39 +577,35 @@ textarea:focus {
 }
 
 .orientation-badge.upright {
-  background: rgba(102, 217, 208, 0.16);
-  border: 1px solid rgba(102, 217, 208, 0.44);
-  color: var(--accent-strong);
-  box-shadow: 0 0 24px rgba(102, 217, 208, 0.12);
+  background: #fff;
+  border: 1px solid rgba(230, 0, 35, 0.18);
+  color: var(--accent);
 }
 
 .orientation-badge.reversed {
-  background: rgba(255, 133, 120, 0.16);
-  border: 1px solid rgba(255, 133, 120, 0.44);
-  color: var(--danger-soft);
-  box-shadow: 0 0 24px rgba(255, 133, 120, 0.12);
+  background: var(--danger-soft);
+  border: 1px solid rgba(158, 10, 10, 0.18);
+  color: var(--danger);
 }
 
 .card-core {
   padding: 26px 18px;
-  background:
-    radial-gradient(circle at top, rgba(233, 200, 137, 0.14), transparent 38%),
-    rgba(5, 14, 24, 0.5);
-  transition: border-color 280ms ease, box-shadow 280ms ease;
+  background: rgba(51, 51, 46, 0.54);
+  transition: border-color 220ms ease, box-shadow 220ms ease;
 }
 
 .tarot-card.is-upright .card-core,
 .tarot-card.is-upright .art-frame {
-  box-shadow: inset 0 0 0 2px rgba(102, 217, 208, 0.2);
+  box-shadow: inset 0 0 0 3px rgba(230, 0, 35, 0.14);
 }
 
 .tarot-card.is-reversed .card-core,
 .tarot-card.is-reversed .art-frame {
-  box-shadow: inset 0 0 0 2px rgba(255, 133, 120, 0.35);
+  box-shadow: inset 0 0 0 3px rgba(158, 10, 10, 0.2);
 }
 
 .tarot-card.is-reversed .card-core {
-  border-color: rgba(255, 133, 120, 0.28);
+  border-color: rgba(209, 77, 65, 0.24);
 }
 
 .card-core-arcana,
@@ -538,23 +616,23 @@ textarea:focus {
 
 .card-core-name {
   margin: 0;
-  font-size: clamp(2rem, 6vw, 2.8rem);
-  color: var(--gold-soft);
+  font-size: 2.65rem;
+  color: var(--inverse);
   line-height: 1.05;
 }
 
 .cards-grid.triple .card-core-name {
-  font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+  font-size: 1.65rem;
 }
 
 .card-core-arcana {
-  color: var(--accent);
+  color: #ffd7d8;
   font-size: 0.92rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 .card-core-keyword {
-  color: rgba(246, 239, 228, 0.84);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 0.96rem;
 }
 
@@ -573,8 +651,8 @@ textarea:focus {
 }
 
 .cards-grid.triple .card-back-mark {
-  font-size: clamp(1.8rem, 4vw, 2.45rem);
-  letter-spacing: 0.12em;
+  font-size: 2.2rem;
+  letter-spacing: 0;
 }
 
 .cards-grid.triple .card-back-text {
@@ -595,7 +673,7 @@ textarea:focus {
 }
 
 .card-core-hint {
-  color: rgba(246, 239, 228, 0.64);
+  color: rgba(255, 255, 255, 0.56);
   font-size: 0.88rem;
 }
 
@@ -611,13 +689,13 @@ textarea:focus {
 }
 
 .orientation-inline.upright {
-  background: rgba(102, 217, 208, 0.12);
-  color: var(--accent-strong);
+  background: rgba(0, 102, 204, 0.1);
+  color: var(--accent);
 }
 
 .orientation-inline.reversed {
-  background: rgba(255, 133, 120, 0.12);
-  color: var(--danger-soft);
+  background: var(--danger-soft);
+  color: var(--danger);
 }
 
 .reading-card.is-hidden {
@@ -626,29 +704,35 @@ textarea:focus {
 
 .reading-block {
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .reading-section {
-  padding: 18px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(233, 200, 137, 0.12);
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  box-shadow: none;
 }
 
 .reading-section p {
   margin: 10px 0 0;
 }
 
+.reading-section h3 {
+  color: var(--ink);
+}
+
 .detail-group + .detail-group {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .detail-label {
   margin: 0;
   color: var(--accent);
   font-size: 0.92rem;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .detail-group p:not(.detail-label) {
@@ -656,6 +740,18 @@ textarea:focus {
 }
 
 @media (max-width: 819px) {
+  .page-shell {
+    padding: 18px 14px 40px;
+  }
+
+  h1 {
+    font-size: 2.75rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
   .spread-options,
   .cards-grid.triple {
     grid-template-columns: 1fr;
@@ -670,11 +766,16 @@ textarea:focus {
     min-height: 0;
   }
 
+  .draw-stage-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .cards-grid {
     min-height: 0;
-    padding: 0;
+    padding: 12px;
     border: none;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
 
@@ -712,10 +813,20 @@ textarea:focus {
   .cards-grid.triple .tarot-card:nth-child(2),
   .cards-grid.triple .tarot-card:nth-child(3) {
     margin-top: 0;
+    transform: none;
   }
 
   .back-copy,
   .card-front-header {
     flex-direction: column;
+  }
+
+  .card-back-mark {
+    font-size: 2.3rem;
+  }
+
+  .card-core-name,
+  .cards-grid.triple .card-core-name {
+    font-size: 2rem;
   }
 }

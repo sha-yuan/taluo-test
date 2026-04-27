@@ -71,6 +71,8 @@ const form = document.querySelector("#tarot-form");
 const questionInput = document.querySelector("#question");
 const cardsGrid = document.querySelector("#cards-grid");
 const drawButton = document.querySelector("#draw-button");
+const stageTitle = document.querySelector("#stage-title");
+const stageBadge = document.querySelector("#stage-badge");
 const readingCard = document.querySelector("#reading-card");
 const readingTitle = document.querySelector("#reading-title");
 const readingSubtitle = document.querySelector("#reading-subtitle");
@@ -87,6 +89,22 @@ function shuffle(array) {
 
 function sleep(ms) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+function updateStageMeta(spread, state = "idle") {
+  stageBadge.textContent = spread === "triple" ? "三张模式" : "单张模式";
+
+  if (state === "drawing") {
+    stageTitle.textContent = spread === "triple" ? "正在把三张牌钉到灵感板上" : "正在把核心牌钉到灵感板上";
+    return;
+  }
+
+  if (state === "revealed") {
+    stageTitle.textContent = spread === "triple" ? "三张牌已经就位，解读已生成" : "核心牌已经就位，解读已生成";
+    return;
+  }
+
+  stageTitle.textContent = spread === "triple" ? "三张牌位已准备好，适合观察完整趋势" : "核心牌位已准备好，适合快速确认方向";
 }
 
 function drawCards(spread) {
@@ -268,10 +286,15 @@ async function animateReveal(cards) {
 
 function updateSpreadView() {
   const spread = new FormData(form).get("spread");
+  cardsGrid.classList.add("is-switching");
   renderPlaceholderCards(spread);
+  updateStageMeta(spread, "idle");
   readingCard.classList.add("is-hidden");
   readingSubtitle.textContent = "";
   readingBlock.innerHTML = "";
+  window.setTimeout(() => {
+    cardsGrid.classList.remove("is-switching");
+  }, 180);
 }
 
 form.addEventListener("change", (event) => {
@@ -289,6 +312,7 @@ form.addEventListener("submit", async (event) => {
 
   drawButton.disabled = true;
   drawButton.textContent = "正在翻牌...";
+  updateStageMeta(spread, "drawing");
   renderCards(cards, spread);
 
   await sleep(380);
@@ -296,6 +320,7 @@ form.addEventListener("submit", async (event) => {
   await sleep(220);
 
   renderReading(question, cards, spread);
+  updateStageMeta(spread, "revealed");
   readingCard.classList.remove("is-hidden");
   readingCard.scrollIntoView({ behavior: "smooth", block: "start" });
 
